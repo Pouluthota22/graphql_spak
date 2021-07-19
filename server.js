@@ -20,9 +20,9 @@ mongoose.connect(dbUrl, {
     if (err) {
         console.log("Database connection Error")
     } else {
-        // controller.insertContinents();
-        // controller.insertCountries();
-        // controller.insertLanguages();
+        controller.insertContinents();
+        controller.insertCountries();
+        controller.insertLanguages();
         console.log("Database connection Succesful");
     }
 })
@@ -54,16 +54,6 @@ var root = {
     }
 };
 
-// var root = {
-//     country: (args) => {
-//       var output = [];
-//       for (var i = 0; i < args.numDice; i++) {
-//         output.push(1 + Math.floor(Math.random() * (args.numSides || 6)));
-//       }
-//       return output;
-//     }
-//   };
-
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({
     extended: false
@@ -74,9 +64,8 @@ app.use('/graphql', graphqlHTTP({
     rootValue: root,
     graphiql: true
 }));
-app.get('/hi', async (req, res, next) => {
+app.get('/test', async (req, res, next) => {
     let data = await controller.fetchByCountry("BR");
-    //console.log("data from ..............", data)
     res.status(200).send({
         msg: "data sucees",
         data: data
